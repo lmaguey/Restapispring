@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <head>
+        <title>Inicio</title>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <header th:replace="layout/plantilla :: header"/>
+        <a th:href="@{/agregar}">Crear Usuarios</a>
+        <div th:if="${usuarios != null and !usuarios.empty}">
+            <table border ="1">
+                <tr>
+                    <th>id</th>
+                    <th>Nombre</th>
+                    <th>Password</th>
+                    <th>Editar</th>
+                    <th>Eliminar</th>
+                </tr>
+                <tr th:each="usuario : ${usuarios}">
+                    <td th:text="${usuario.id}">Mostrar Id</td>
+                    <td th:text="${usuario.nombre}">Mostrar Nombre</td>
+                    <td th:text="${usuario.password}">Mostrar Password</td>
+                    <td><a th:href="@{/editar/} + ${usuario.id}" th:text="Editar"/></td>
+                    <td><a th:href="@{/eliminar/} + ${usuario.id}" th:text="Eliminar"/></td>
+                </tr>
+
+
+            </table>
+        </div>
+        
+        <div th:if="${usuarios == null or usuarios.empty}">
+            
+            La lista de usuarios está vacía.
+        </div>
+
+           <footer th:replace="layout/plantilla :: footer"/>
+    </body>
+</html>
